@@ -1,7 +1,6 @@
 import Evenement from '../models/evenement.js';
-import mongoose from 'mongoose';
 import ObjectID from 'mongodb';
-
+import Notification from '../models/notification.js';
 
 //get all events
 
@@ -63,12 +62,12 @@ export function deleteById(req, res) {
     Evenement.findById(req.params.id).then(doc => {
         const participants = doc.participants;
         participants.forEach(participant => {
-            const notification = {
+            const notification = new Notification({
                 type: "event",
                 message: "l'evenement " + doc.name + " a été supprimé",
                 date: new Date().toISOString(),
                 user: participant
-            }
+            })
         }).then(notification => {
             notification.save();
             doc.remove().then(doc => {
@@ -196,7 +195,7 @@ export function unparticipate(req, res) {
             if (!doc.participants.includes(req.body.user)) {
                 res.status(500).json({ error: "déjà unparticipé" });
             } else {
-                doc.participants = doc.participants.filter(participant => participant !== req.body.user);
+                doc.participants.pull(req.body.user);
                 doc.save().then(doc => {
                     res.status(200).json(doc);
                 }).catch(err => {

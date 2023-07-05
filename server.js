@@ -3,6 +3,7 @@ import mongoose from 'mongoose'; // Importer Mongoose
 
 import evenementRoutes from './routes/evenement.js';
 import categorieRoutes from './routes/categorie.js';
+import notificationRoutes from './routes/notification.js';
 import logger from 'morgan';
 const app = express();
 app.use(logger('dev'));
@@ -31,6 +32,7 @@ app.use(express.json());
 
 app.use('/evenements', evenementRoutes);
 app.use('/categorie', categorieRoutes);
+app.use('/notifications', notificationRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
