@@ -1,26 +1,34 @@
 import express from 'express';
-
-import { getAll, addOnce, getOnce, deleteOnce,updateOnce,getSearch,getTri,getTriCat,participate,unparticipate } from '../controllers/evenement.js';
+import {
+  getAll,
+  getAllByCat,
+  getAllByUser,
+  add,
+  deleteById,
+  update,
+  getById,
+  getByName,
+  getByDate,
+  getSearch,
+  getTri,
+  participate,
+  unparticipate
+} from '../controllers/evenementController.js';
 
 const router = express.Router();
 
-
+router.get('/search', getSearch);
 router.get('/', getAll);
-router.get('/:id', getOnce);
-router.post('/', addOnce);
-router.delete('/:id', deleteOnce);
-router.put('/:id', updateOnce);
-router.post('/recherche', getSearch);
-router.post('/tri', getTri);
-router.post('/category/tri', getTriCat);
+router.get('/category/:id', getAllByCat);
+router.get('/user/:id', getAllByUser);
+router.post('/', add);
+router.delete('/:id', deleteById);
+router.get('/sort', getTri);
+router.put('/:id', update);
+router.get('/:id', getById);
+router.get('/name/:name', getByName);
+router.get('/date/:date', getByDate);
 router.post('/participate', participate);
 router.post('/unparticipate', unparticipate);
 
-
-  
 export default router;
-
-
-
-
-

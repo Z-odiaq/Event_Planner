@@ -3,9 +3,11 @@ import mongoose from 'mongoose'; // Importer Mongoose
 
 import evenementRoutes from './routes/evenement.js';
 import categorieRoutes from './routes/categorie.js';
-
+import logger from 'morgan';
 const app = express();
-const port = process.env.PORT || 9090;
+app.use(logger('dev'));
+
+const port = process.env.PORT || 3000;
 const databaseName = 'manel';
 
 // Cela afichera les requêtes MongoDB dans le terminal
@@ -27,7 +29,7 @@ mongoose
 
 app.use(express.json());
 
-app.use('/evenement', evenementRoutes);
+app.use('/evenements', evenementRoutes);
 app.use('/categorie', categorieRoutes);
 
 app.listen(port, () => {

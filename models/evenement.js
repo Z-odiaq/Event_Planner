@@ -10,6 +10,7 @@ const evenementSchema = new mongoose.Schema(
         },
         nbparticipant: {
             type: Number,
+            default: 0,
             required: true
         },
         date: {
@@ -19,9 +20,6 @@ const evenementSchema = new mongoose.Schema(
         dateFin: {
             type: String,
             required: true
-        },
-        googleCalendarId: {
-            type: String,
         },
         lieu: {
             type: String,
@@ -37,7 +35,8 @@ const evenementSchema = new mongoose.Schema(
         },
         categorie : { 
             type: mongoose.Schema.Types.ObjectId, 
-            ref:'Categorie', required: true 
+            ref:'Categorie', 
+            required: true 
         },
         
     },
@@ -46,8 +45,5 @@ const evenementSchema = new mongoose.Schema(
     }
 );
 
-/**
- * Créer notre modèle à partir du schéma pour effectuer
- * des actions CRUD sur nos documents et l'exporter
- */
+
 export default model("Evenement", evenementSchema);

@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getAll, addOnce, getOnce, deleteOnce, updateOnce } from '../controllers/categorie.js';
+import { getAll, addOnce, getOnce, deleteOnce, updateOnce } from '../controllers/categorieController.js';
 
 const router = express.Router();
 
